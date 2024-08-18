@@ -8,7 +8,7 @@ The repository contains code for a project conducted at [Lund University](https:
 - Computation of the LI (Laterality Index)
 - Data analysis
 
-Geometric Eigenmode is a method used for neuroimaging analysis, as hilighted in [Pang]((https://www.nature.com/articles/s41586-023-06098-1)). This analysis draws inspiration from [NSBLab toolbox](https://github.com/NSBLab/BrainEigenmodes/tree/main) and used code from [(saSOSKS) repository](https://github.com/aitchbi/saSOSKS). 
+Geometric Eigenmode is a method used for neuroimaging analysis, as hilighted in [Pang]((https://www.nature.com/articles/s41586-023-06098-1)). This analysis draws inspiration from [NSBLab toolbox](https://github.com/NSBLab/BrainEigenmodes/tree/main) and used code from [saSOSKS repository](https://github.com/aitchbi/saSOSKS). 
 ## Files structure
 ```
 ├── Modal_Approximation
