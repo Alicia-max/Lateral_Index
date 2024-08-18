@@ -1,15 +1,21 @@
 function plot_brains(vtk_file, data_to_recon,eigen_file, reconstruction_file, medial_wall_file, data_output, hemisphere, num_modes, map_int, mode_interest, dir_func)
   
-    % Function to visualize surface eigenmodes and reconstruction
+    % Function to visualize surface eigenmodes, reconstruction of spatial pattern and the signal of origin
     %
-    % Parameters:
-    % subject - Subject ID (numeric)
-    % hemisphere - Hemisphere ('lh' or 'rh') (string)
-    % num_modes - Number of modes (numeric)
-    % mesh_interest - Mesh of interest ('white', etc.) (string)
-    % map_int - Map integer (numeric)
+    % Input:
+    % _______
+    % vtk_file [str]- cortical surface mesh represensation (output from FreeSurfer) 
+    % data_to_recon [str]- spatial pattern to plot (.mat file)
+    % eigen_file [str] - designed geometric eigenmodes (.mat file)
+    % reconstruction_file [str]- modal approximation  of the 'data_to_recon' using the 'eigen_file' (.mat file)
+    % medial_wall_file [str] - extracted medial wall 
+    % data_output [str] - directroy to store the resulting plot
+    % hemisphere [str] - hemipshere to plot ('rh' or 'lh')
+    % num_modes [int] - number of extracted mode
+    % map_int [str] - index of the map of intest (1 for BF, 1 to 200 for SSBCAPs)
+    % mode_interest [list] - geometric modes of interest to plot
+    % dir_func [str] - pathway to the help matlab functions
       
-
     addpath(genpath(dir_func));
 
     % Display start message

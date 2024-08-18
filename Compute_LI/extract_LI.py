@@ -10,6 +10,19 @@ import json
 import mat73
 
 def get_grouped_betas (betas, indexes):
+    """
+    Function to group betas according the defined sub-band.
+
+    Inputs
+    -------
+        - betas [df] : weights  fron the modal approximations
+        - indexes [list] : sub-band indexes
+
+    Outputs
+    -------
+        - grouped_betas [df] : grouped weights
+    """
+
     betas_abs=betas.abs()
     grouped_betas = np.zeros((len(indexes), np.shape(betas)[1]))
     for idx, index_list in enumerate(indexes):     
@@ -18,7 +31,21 @@ def get_grouped_betas (betas, indexes):
     return grouped_betas
 
 def get_p_val(permu_mat, observed_vector, seuil):
-    
+    """
+    Function to compute LI p-values
+
+    Inputs
+    -------
+        - permu_mat [arr] : matrix with permutated LI (n_sub_band x n_permu)
+        - observed_vector [arr] : vector with the observe LI (n_sub_band)
+        - seuil [float] : significance threshold
+
+    Outputs
+    -------
+        - sp [arr] : number of permu_mat > observed_vector
+        - sprob [arr] : p-values
+        - signif_LI [arr] : index of signficant LI 
+    """
     n_perm = permu_mat.shape[1]
     seuil = seuil/permu_mat.shape[0]
     permu_mat=np.hstack((permu_mat, np.transpose([observed_vector])))
@@ -28,23 +55,63 @@ def get_p_val(permu_mat, observed_vector, seuil):
     return sp, sprob, signif_LI
 
 def get_LI(directory, hemispheres, modes, nperm, permu_dir, map_):
+    """
+    Function to compute LI and load permuted LI
+
+    Inputs
+    -------
+        - directory [str] : directory with saved weights from modal modelisation
+        - hemispheres [str] : hemipshere of interest ('lh' or 'rh')
+        - modes [int] : number of extracted modes
+        - nperm [int] : number of permuation
+        - permu_dir [str] : directory with permutated data output
+        - map_ [list] : spatial map of intest
+
+    Outputs
+    -------
+        - LI [arr] : compuated LI (1 x n_sub_band)
+        - permu_LI [arr] : (nperm xn_sub_band)
+    """
     grouped_betas={}
     permu_LI={}
     for h in hemispheres: 
+        #Sub-band loading
         indexes= loadmat(f'{directory}/{h}_grouped_values_diff.mat')['Y2'].flatten()
         indexes_list = [list(arr.flatten() - 1) if arr.size > 0 else [] for arr in indexes]
+
+        # if multiple map, only load the intersting ones
         if(len(map_)>1):
             betas_ = mat73.loadmat(f'{directory}/{h}_betas_all_mode_{modes}_normed.mat')['recon_beta_final'][:,map_]
         else :
             betas_ = mat73.loadmat(f'{directory}/{h}_betas_all_mode_{modes}_normed.mat')['recon_beta_final']
+
+        # Get Permuated LI
         grouped_betas[h]=get_grouped_betas(pd.DataFrame(betas_), indexes_list)  
-        
         permu_LI[h]= loadmat(f'{permu_dir}/{h}_beta_permu_{modes}_{nperm}_grouped.mat')['beta_permutation']
-   
+
+    # LI computation
     LI=(grouped_betas['rh']- grouped_betas['lh'])
     return LI , permu_LI
 
-def significant_LIs(directory_path, LI, permu_LI, color, seuil=0.05, plot_directory=None):
+def significant_LIs(LI, permu_LI, color, seuil=0.05, plot_directory=None):
+    """
+    Function to compute LI and load permuted LI
+
+    Inputs
+    -------
+        - directory [str] : directory with saved weights from modal modelisation
+        - hemispheres [str] : hemipshere of interest ('lh' or 'rh')
+        - modes [int] : number of extracted modes
+        - nperm [int] : number of permuation
+        - permu_dir [str] : directory with permutated data output
+        - map_ [list] : spatial map of intest
+
+    Outputs
+    -------
+        - LI [arr] : compuated LI (1 x n_sub_band)
+        - permu_LI [arr] : (nperm xn_sub_band)
+    """
+
     n_map = LI.shape[1]
     significant_LIs = []
     for map_ in range(n_map):
