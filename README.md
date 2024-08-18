@@ -16,23 +16,21 @@ Geometric Eigenmode is a method used for neuroimaging analysis, as hilighted in 
     ├── surface_eigenmodes.py
     ├── run_recon.m
     ├── run_reconstruction.sh
+├── Spectral_Alignment
+    ├── run_subbdand.m
+    ├── subbands.sh
 ├── Compute_LI
     ├── demo_permu.m
     ├── run_permu.sh
     ├── extract_LI.py
-    ├── run_ 
-    ├── run_reconstruction.sh
-├── compute_LI
     ├── configs
-        ├── permu.json
-    ├── get_LI.py
-    ├── run_permu.sh
-    ├── demo_run.m
-    ├── data_exploration.ipynb
-    ├── grouping_LI_exploration.ipynb
-├── plotting
-    ├── plot.sh
-    ├── plot_brains.m
+        ├── .json
+├── Data_Analysis
+    ├── accuracy.ipynb
+    ├── main_results.ipynb
+    ├── get_id.ipynb
+    ├── utils.py
+├── functions_matlaba
 
 ```
 
