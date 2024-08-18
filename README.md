@@ -38,7 +38,6 @@ functions_matlab are deriveed from [NSBLab toolbox](https://github.com/NSBLab/Br
 
 ## Implementation 
 
-
 ### Modal_Approximation
 
  `surface_eigenmodes.py` : Python script using [LaPy](https://github.com/Deep-MI/LaPy/tree/main) to extract geometric eigenmodes from FreeSurfer output. It extracts ad store volume corrected eigenvalues and geomtric modes. 
@@ -75,6 +74,12 @@ functions_matlab are deriveed from [NSBLab toolbox](https://github.com/NSBLab/Br
 `utils.py` : Python code containing useful function for the notebook. 
 
 ## Usage 
+As part of an overall project, the codes depend on each other's output. The extraction of modes and approximation of the signal should be run first. Once applied to each subject of interest, spectral alignment can be performed. Finally, the permutation testing, followed by LI computation, can be executed.
+
+All code runs using a bash script provided as an example, except for extract_LI.py, which can be run using the following command:
+'''
+python extract_LI.pyS.py --config  config/file.json
+'''
 
 ## Dependencies 
  - FreeSurfer
