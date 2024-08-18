@@ -11,11 +11,16 @@ The repository contains code for a project conducted at [Lund University](https:
 Geometric Eigenmode is a method used for neuroimaging analysis, as hilighted in [Pang]((https://www.nature.com/articles/s41586-023-06098-1)). This analysis draws inspiration from [NSBLab toolbox](https://github.com/NSBLab/BrainEigenmodes/tree/main) and used code from [(saSOSKS) repository](https://github.com/aitchbi/saSOSKS). 
 ## File structure
 ```
-├── Extraction_Eigenmodes
+├── Modal_Approximation
     ├── demo_eigenmode_calculation.sh
     ├── surface_eigenmodes.py
-├── Reconstruction 
     ├── run_recon.m
+    ├── run_reconstruction.sh
+├── Compute_LI
+    ├── demo_permu.m
+    ├── run_permu.sh
+    ├── extract_LI.py
+    ├── run_ 
     ├── run_reconstruction.sh
 ├── compute_LI
     ├── configs
