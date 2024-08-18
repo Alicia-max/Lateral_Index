@@ -30,9 +30,11 @@ Geometric Eigenmode is a method used for neuroimaging analysis, as hilighted in 
     ├── main_results.ipynb
     ├── get_id.ipynb
     ├── utils.py
-├── functions_matlaba
+├── functions_matlab
+├── requirement.txt
 
 ```
+functions_matlab are deriveed from [NSBLab toolbox](https://github.com/NSBLab/BrainEigenmodes/tree/main) and [(saSOSKS) repository](https://github.com/aitchbi/saSOSKS).
 
 ## Implementation 
 
@@ -79,4 +81,4 @@ Geometric Eigenmode is a method used for neuroimaging analysis, as hilighted in 
  - LaPy
 
 ## Compatibility  
-The codes have been tested on versions of Python ... and versions of MATLAB ....
+The codes have been tested on versions of Python 3.8 and .. and versions of MATLAB R2021b and . 
