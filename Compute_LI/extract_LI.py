@@ -20,7 +20,7 @@ def get_grouped_betas (betas, indexes):
 
     Outputs
     -------
-        - grouped_betas [df] : grouped weights
+        - grouped_betas [arr] : grouped weights(n_subband, n_maps)
     """
 
     betas_abs=betas.abs()
@@ -69,8 +69,8 @@ def get_LI(directory, hemispheres, modes, nperm, permu_dir, map_):
 
     Outputs
     -------
-        - LI [arr] : compuated LI (1 x n_sub_band)
-        - permu_LI [arr] : (nperm xn_sub_band)
+        - LI [arr] : compuated LI ( n_sub_band x n_map )
+        - permu_LI [arr] : (nperm x n_map x n_sub_band)
     """
     grouped_betas={}
     permu_LI={}
@@ -95,36 +95,52 @@ def get_LI(directory, hemispheres, modes, nperm, permu_dir, map_):
 
 def significant_LIs(LI, permu_LI, color, seuil=0.05, plot_directory=None):
     """
-    Function to compute LI and load permuted LI
+    Function to extract significant LI
 
     Inputs
     -------
-        - directory [str] : directory with saved weights from modal modelisation
-        - hemispheres [str] : hemipshere of interest ('lh' or 'rh')
-        - modes [int] : number of extracted modes
-        - nperm [int] : number of permuation
-        - permu_dir [str] : directory with permutated data output
-        - map_ [list] : spatial map of intest
+        - LI [arr] : directory with saved weights from modal modelisation
+        - permu_LI [str] : hemipshere of interest ('lh' or 'rh')
+        - color [int] : number of extracted modes
+        - seuil [int] : number of permuation
+        - plot_directory [str] : directory with permutated data output
 
     Outputs
     -------
         - LI [arr] : compuated LI (1 x n_sub_band)
         - permu_LI [arr] : (nperm xn_sub_band)
     """
-
     n_map = LI.shape[1]
     significant_LIs = []
+    #Interates across the different maps
     for map_ in range(n_map):
+        #Get permutated matrix for the map of interest
         sub_permu_rh = permu_LI['rh'][:, map_, :]
         sub_permu_lh = permu_LI['lh'][:, map_, :]
         LI_matrix = (sub_permu_rh - sub_permu_lh)
+        #p-value computation
         sp, sprob, signif_LI = get_p_val(LI_matrix, LI[:,map_], seuil)
+
         if(plot_directory):
+             #plot LI spectrum 
             plot_sig(LI[:,map_],color,  light_color(color, 0.7),signif_LI, map_, plot_directory, f"Map_{map_}")
         significant_LIs.append(signif_LI) 
     return significant_LIs
 
 def light_color(rgb_color, factor):
+    """
+    Function to modify received color darkness
+
+    Inputs
+    -------
+        - rgb_color [arr] : contain rgb code for a colour
+        - factor [float] : factor to chane rgb color uniformly 
+    Outputs
+    -------
+        - darkened_r [float]: red modified colour
+        - darkened_g [float] : green modified colour
+        - darkened_b [float] : bleu modified colour
+    """
 
     r, g, b = rgb_color
     darkened_r = float(r *factor)
@@ -133,10 +149,32 @@ def light_color(rgb_color, factor):
     return (darkened_r, darkened_g, darkened_b)
 
 def modify_color(c, index, col ) : 
+    """
+    Function to modify modifies the color array by changing the color at specified indexes to a new color
+    Inputs
+    -------
+        - c  [list]:  list of color for each bar in the plot.
+        - index [list] : specified index
+        - col [list]:  new list color to apply at the specified indexes
+    """
     for i in index : 
         c[i] = col
         
 def plot_sig(array_AI, color1, color2, selected_indexes, map_, out_directory, name):
+    """
+    Function to plot LI specturm after permutation
+
+    Inputs
+    -------
+        - array_AI [arr]:  LI spectrum to plot
+        - color1 : defalt color for each bar 
+        - color2 :  color to be applied to bars at the selected_indexes
+        - selected_indexes [arr] : significant LI
+        - map_ [int]: map of interest
+        - out_directory [str] : directory to save the result
+        - name [str]: name of the plot
+    """
+        
     c = [color1] * len(array_AI)
     modify_color(c, selected_indexes, color2)
     
@@ -155,7 +193,15 @@ def plot_sig(array_AI, color1, color2, selected_indexes, map_, out_directory, na
     plt.close()
 
 def get_final_dataset_Tau(LI,significant_LIs,subject): 
-
+    """
+    Function to gather signficant LI at the level of the subject (BF data)
+    
+    Inputs
+    -------
+        - LI [arr]: LI vector 
+        - significant_LIs : sigfnicant LI 
+        - subject :  id of the subject
+    """
     sub_vec = np.zeros((np.shape(significant_LIs)[1], 3), dtype=object)
     sig_LI = LI[significant_LIs, 0]
     sub_vec[:, 0] = [subject] * len(sig_LI)
@@ -167,6 +213,17 @@ def get_final_dataset_Tau(LI,significant_LIs,subject):
     
     
 def get_final_dataset_SSBCAP(names_nw, map_names, LI,significant_LIs,subject):
+    """
+    Function to gather signficant LI at the level of the subject (SSBCAP)
+    
+    Inputs
+    -------
+        - names_nw [arr] : network names
+        - map_names [arr] : names of the maps
+        - LI [arr]: LI vector 
+        - significant_LIs : sigfnicant LI 
+        - subject :  id of the subject
+    """
     all_sub_vecs = []
 
     for idx, map_name in enumerate(map_names):
@@ -180,7 +237,6 @@ def get_final_dataset_SSBCAP(names_nw, map_names, LI,significant_LIs,subject):
         sub_vec[:, 3] = sig_LI
         sub_vec[:, 4] = significant_LIs[idx]+1 #Because we want 1-20 and not 0-19
         all_sub_vecs.append(sub_vec)
-        
     final_array = np.concatenate(all_sub_vecs)
     return  final_array
 
