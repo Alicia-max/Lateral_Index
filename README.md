@@ -1,22 +1,26 @@
 # Laterality Index
 
 ## Background 
-The repository contains code for a project conducted at [Lund University](https://www.lunduniversity.lu.se/lucat/group/v1000549), supervised by Hamid Behjat. The aim is to develop new tools to measure hemispheric asymmetry using [geometric eigenmodes](https://www.nature.com/articles/s41586-023-06098-1). The project is mainly divided into three main parts:
+The repository contains code for a project conducted at [Lund University](https://www.lunduniversity.lu.se/lucat/group/v1000549), supervised by Hamid Behjat. The aim is to develop a new tool to measure hemispheric asymmetry using [geometric eigenmodes](https://www.nature.com/articles/s41586-023-06098-1). The project is mainly divided into four main parts:
 
-- Geometric eigenmodes extraction
-- Reconstruction of the selected spatial pattern
+- Modal Appromixation of the spatial pattern
+- Spectral Alignement
 - Computation of the LI (Laterality Index)
+- Data analysis
 
-Geometric Eigenmode is a method used for neuroimaging analysis, as hilighted in [Pang]((https://www.nature.com/articles/s41586-023-06098-1)). This Analysis  has draws inspiration from [NSBLab toolbox](https://github.com/NSBLab/BrainEigenmodes/tree/main). Using this code, the idea is to measure hemipsheric asymmetry fron a spatial pattern map using it geometric modes from derived from the left and the right hemispheric cortical surface.
-
+Geometric Eigenmode is a method used for neuroimaging analysis, as hilighted in [Pang]((https://www.nature.com/articles/s41586-023-06098-1)). This analysis draws inspiration from [NSBLab toolbox](https://github.com/NSBLab/BrainEigenmodes/tree/main) and used code from [(saSOSKS) repository](https://github.com/aitchbi/saSOSKS). 
 ## File structure
 ```
-
-├── Extraction_Eigenmodes
+├── Modal_Approximation
     ├── demo_eigenmode_calculation.sh
     ├── surface_eigenmodes.py
-├── Reconstruction 
     ├── run_recon.m
+    ├── run_reconstruction.sh
+├── Compute_LI
+    ├── demo_permu.m
+    ├── run_permu.sh
+    ├── extract_LI.py
+    ├── run_ 
     ├── run_reconstruction.sh
 ├── compute_LI
     ├── configs
