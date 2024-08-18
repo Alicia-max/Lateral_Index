@@ -1,15 +1,15 @@
-# Laterality Index
+# Lateral Index
 
 ## Background 
-The repository contains code for a project conducted at [Lund University](https://www.lunduniversity.lu.se/lucat/group/v1000549), supervised by Hamid Behjat. The aim is to develop a new tool to measure hemispheric asymmetry using [geometric eigenmodes](https://www.nature.com/articles/s41586-023-06098-1). The project is mainly divided into four main parts:
+The repository contains code for a project conducted at [Lund University](https://www.lunduniversity.lu.se/lucat/group/v1000549), supervised by Hamid Behjat. The aim is to develop a new tool to measure hemispheric asymmetry using [geometric eigenmodes](https://www.nature.com/articles/s41586-023-06098-1). The project is mainly divided into four main stages:
 
 - Modal Appromixation of the spatial pattern
 - Spectral Alignement
 - Computation of the LI (Laterality Index)
 - Data analysis
 
-Geometric Eigenmode is a method used for neuroimaging analysis, as hilighted in [Pang]((https://www.nature.com/articles/s41586-023-06098-1)). This analysis draws inspiration from [NSBLab toolbox](https://github.com/NSBLab/BrainEigenmodes/tree/main) and used code from [(saSOSKS) repository](https://github.com/aitchbi/saSOSKS). 
-## File structure
+Geometric Eigenmode is a method used for neuroimaging analysis, as hilighted in [Pang]((https://www.nature.com/articles/s41586-023-06098-1)). This analysis draws inspiration from [NSBLab toolbox](https://github.com/NSBLab/BrainEigenmodes/tree/main) and used code from [saSOSKS repository](https://github.com/aitchbi/saSOSKS). 
+## Files structure
 ```
 ├── Modal_Approximation
     ├── demo_eigenmode_calculation.sh
@@ -30,12 +30,13 @@ Geometric Eigenmode is a method used for neuroimaging analysis, as hilighted in 
     ├── main_results.ipynb
     ├── get_id.ipynb
     ├── utils.py
-├── functions_matlaba
+├── functions_matlab
+├── requirement.txt
 
 ```
+functions_matlab are deriveed from [NSBLab toolbox](https://github.com/NSBLab/BrainEigenmodes/tree/main) and [(saSOSKS) repository](https://github.com/aitchbi/saSOSKS).
 
 ## Implementation 
-
 
 ### Modal_Approximation
 
@@ -73,10 +74,18 @@ Geometric Eigenmode is a method used for neuroimaging analysis, as hilighted in 
 `utils.py` : Python code containing useful function for the notebook. 
 
 ## Usage 
+As part of an overall project, the codes depend on each other's output. The extraction of modes and approximation of the signal should be run first. Once applied to each subject of interest, spectral alignment can be performed. Finally, the permutation testing, followed by LI computation, can be executed.
 
+All code runs using a bash script provided as an example, except for extract_LI.py, which can be run using the following command:
+
+```bash
+python extract_LI.pyS.py --config  config/file.json
+```
+
+with file.json as in `config/`
 ## Dependencies 
  - FreeSurfer
  - LaPy
 
 ## Compatibility  
-The codes have been tested on versions of Python ... and versions of MATLAB ....
+The codes have been tested on versions of Python 3.8 and .. and versions of MATLAB R2021b and . 
