@@ -1,7 +1,7 @@
 # Laterality Index
 
 ## Background 
-The repository contains code for a project conducted at [Lund University](https://www.lunduniversity.lu.se/lucat/group/v1000549), supervised by Hamid Behjat. The aim is to develop a new tool to measure hemispheric asymmetry using [geometric eigenmodes](https://www.nature.com/articles/s41586-023-06098-1). The project is mainly divided into four main parts:
+The repository contains code for a project conducted at [Lund University](https://www.lunduniversity.lu.se/lucat/group/v1000549), supervised by Hamid Behjat. The aim is to develop a new tool to measure hemispheric asymmetry using [geometric eigenmodes](https://www.nature.com/articles/s41586-023-06098-1). The project is mainly divided into four main stages:
 
 - Modal Appromixation of the spatial pattern
 - Spectral Alignement
@@ -82,7 +82,7 @@ All code runs using a bash script provided as an example, except for extract_LI.
 python extract_LI.pyS.py --config  config/file.json
 ```
 
-with file.json as in `confg/`
+with file.json as in `config/`
 ## Dependencies 
  - FreeSurfer
  - LaPy
