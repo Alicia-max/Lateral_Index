@@ -1,4 +1,16 @@
 function run_recon(file_gii,file_eigen, dir_mat, hemisphere, num_modes, stepwise, matlab_dir, step_)
+    % Function to compute reconstruct a spatial map using geoemtric eigenmode
+    %
+    % Input:
+    % _______
+    % file_gii [str]- spatial pattern to reconstruct (.gii)
+    % file_eigen [str]- extracted eigenmodes(.txt)
+    % dir_mat [str] - directory to save the results
+    % hemisphere [str] - hemipshere to plot ('rh' or 'lh')
+    % num_modes [int] - number of extracted mode
+    % stepwise [bool] - indicates if stepwise reconstruction or not
+    % matlab_dir [str] - directory with help functions
+    % step_ [int] - number of step
     disp("START");
     
     % TODO : Default value
