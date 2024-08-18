@@ -1,0 +1,13 @@
+{
+  "subjects":[118],
+  "modes": 500,
+  "n_perm": 1000,
+  "hemispheres": ["rh", "lh"],
+  "names_nw_file": "None",
+  "data_dir": "/media/miplab-nas2/Data3/Hamid_Alicia/results", 
+  "output_file" : "/media/miplab-nas2/Data3/Hamid_Alicia/results/C1_BF_500_05.pkl", 
+  "permu_dir" : "500_modes", 
+  "seuil" : 0.01, 
+  "map" :[1]
+}
+
