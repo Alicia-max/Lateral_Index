@@ -37,38 +37,46 @@ Geometric Eigenmode is a method used for neuroimaging analysis, as hilighted in 
 ## Implementation 
 
 
-### Extraction_Eigenmodes 
+### Modal_Approximation
 
-`demo_eigenmode_calculation.sh` : Bash script to run `surface_eigenmodes.py` that could be modify if needed.
+ `surface_eigenmodes.py` : Python script using [LaPy](https://github.com/Deep-MI/LaPy/tree/main) to extract geometric eigenmodes from FreeSurfer output. It extracts ad store volume corrected eigenvalues and geomtric modes. 
 
- `surface_eigenmodes.py` : Python script using [LaPy](https://github.com/Deep-MI/LaPy/tree/main) to extract geometric eigenmodes from FreeSurfer output. 
+ `demo_eigenmode_calculation.sh` : Editable bash script to run `surface_eigenmodes.py` 
+ 
+ `run_recon.m` : Matlab script to appproximate spatial pattern using derived geomtric egienmodes. It extractes weights and intermediate variables usefull for further analayis. 
+ 
+ `run_reconstruction.sh` : Editable bash script to run  `run_recon.m`
 
- --> output  : eigenvalue, eigenmodes and normalized eigenval. 
+###  Spectral_Alignment
 
-###  Reconstruction
+`run_subbdand.m` : Matlab script to design spectral sub-band. 
 
-`run_reconstruction.sh` : Bash script to run  `run_recon.m` that could be modify if needed.
-
-`run_recon.m` : Matlab Script that compute the weights associated with each modes to reconstruced the given spatial pattern. 
-
- --> output  : normalized spatial map, betas, grouped betas, stepwise accuracy
-
+`subbands.sh` : Editable bash script to run `run_subbdand.m`
 
 ###  Compute_LI
 
-`run_permu.sh` : Bash script to run `demo_run.m`
+`demo_permu.m` : Matlab script for permuation testing of the designed index. 
 
-`demo_run.m` : todo
+`run_permu.sh` : Editable bash script to run `demo_permu.m`
 
-`get_LI.py` :todo
+`extract_LI.py` : Python code to collect LI spectra at the group level. It takes as an input a config file and output the designed dataset with a .pkl file format. 
 
+`configs`: directory containing example of example files.
 
+### Data_Analysis
+`accuracy.ipynb` : Python code to plot intermediate analysis (accuracy and sub-band assignement). 
+
+`main_results.ipynb`  : Python code to extract the main result from the project by using the designed dataset with `extract_LI.py`.
+
+`main_results.ipynb` : Python code to extract [BioFinder-2](https://biofinder.se) subset dataset. 
+
+`utils.py` : Python code containing useful function for the notebook. 
 
 ## Usage 
 
 ## Dependencies 
- -  FreeSurfer
- -  Check Python Lib (LaPy; brainSpace;)
+ - FreeSurfer
+ - LaPy
 
 ## Compatibility  
 The codes have been tested on versions of Python ... and versions of MATLAB ....
