@@ -88,4 +88,4 @@ with file.json as in `config/`
  - LaPy
 
 ## Compatibility  
-The codes have been tested on versions of Python 3.8 and .. and versions of MATLAB R2021b and . 
+The codes have been tested on versions of Python 3.8/3.10 and versions of MATLAB R2020b/R2021b. 
