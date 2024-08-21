@@ -275,7 +275,8 @@ def main(config_path):
         
         LI, permu_LI=get_LI(directory,hemipsheres, modes, n_perm, permu_dir_, map_ )
     
-        sig=significant_LIs(permu_dir_, LI,permu_LI, (0.86, 0.3712, 0.33999999999999997), seuil, plot_dir)
+        colors=(0.86, 0.3712, 0.33999999999999997)
+        sig=significant_LIs(LI,permu_LI,colors , seuil, plot_dir)
     
         
         if(names_nw_file != "None"):
