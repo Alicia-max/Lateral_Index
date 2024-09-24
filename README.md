@@ -1,4 +1,4 @@
-# Lateral Index
+# Laterality Index
 
 ## Background 
 The repository contains code for a project conducted at [Lund University](https://www.lunduniversity.lu.se/lucat/group/v1000549), supervised by Hamid Behjat. The aim is to develop a new tool to measure hemispheric asymmetry using [geometric eigenmodes](https://www.nature.com/articles/s41586-023-06098-1). The project is mainly divided into four main stages:
